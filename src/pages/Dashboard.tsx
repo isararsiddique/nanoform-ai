@@ -49,7 +49,7 @@ export default function Dashboard() {
   ];
 
   return (
-    <AppLayout title="Dashboard" subtitle="Nanomedicine R&D Platform Overview">
+    <AppLayout title="Dashboard" subtitle="NanoSovereign R&D Platform Overview">
       <div className="space-y-8">
         {/* Stats Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
@@ -196,7 +196,7 @@ export default function Dashboard() {
             © 2024 <span className="font-semibold">Arshi Niyaz</span>. All Rights Reserved.
           </p>
           <p className="text-xs text-muted-foreground/60 mt-1">
-            NanoMed R&D Platform - Advanced Nanomedicine Research & Development
+            NanoSovereign - Advanced Nanomedicine Research & Development
           </p>
         </div>
       </div>

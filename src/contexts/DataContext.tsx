@@ -68,13 +68,13 @@ interface DataContextType {
 const DataContext = createContext<DataContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  projects: 'nanomed-projects',
-  experiments: 'nanomed-experiments',
-  batches: 'nanomed-batches',
-  dataUploads: 'nanomed-uploads',
-  auditLog: 'nanomed-audit',
-  predictions: 'nanomed-predictions',
-  initialized: 'nanomed-initialized',
+  projects: 'nanosov-projects',
+  experiments: 'nanosov-experiments',
+  batches: 'nanosov-batches',
+  dataUploads: 'nanosov-uploads',
+  auditLog: 'nanosov-audit',
+  predictions: 'nanosov-predictions',
+  initialized: 'nanosov-initialized',
 };
 
 export function DataProvider({ children }: { children: ReactNode }) {
