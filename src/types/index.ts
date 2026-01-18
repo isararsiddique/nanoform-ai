@@ -1,4 +1,4 @@
-// Core domain types for the Nanomedicine R&D Platform
+// Core domain types for the NanoSovereign R&D Platform
 
 export interface User {
   id: string;

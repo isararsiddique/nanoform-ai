@@ -41,7 +41,7 @@ export function Sidebar() {
           {!collapsed && (
             <div className="flex flex-col">
               <span className="text-base font-bold text-sidebar-foreground tracking-tight">
-                NanoMed
+                NanoSovereign
               </span>
               <span className="text-[11px] text-sidebar-foreground/50 font-medium uppercase tracking-wider">
                 R&D Platform

@@ -12,10 +12,10 @@ import {
 
 export const mockUser: User = {
   id: 'usr-001',
-  email: 'arshi.niyaz@nanolab.sa',
+  email: 'arshi.niyaz@nanosovereign.io',
   name: 'Arshi Niyaz',
   role: 'scientist',
-  organization: 'King Abdullah Nanomedicine Institute',
+  organization: 'NanoSovereign Research Institute',
 };
 
 export const mockProjects: Project[] = [
