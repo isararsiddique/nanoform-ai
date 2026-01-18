@@ -12,8 +12,8 @@ import {
 
 export const mockUser: User = {
   id: 'usr-001',
-  email: 'dr.aisha.rahman@nanolab.sa',
-  name: 'Dr. Aisha Rahman',
+  email: 'arshi.niyaz@nanolab.sa',
+  name: 'Arshi Niyaz',
   role: 'scientist',
   organization: 'King Abdullah Nanomedicine Institute',
 };
@@ -26,7 +26,7 @@ export const mockProjects: Project[] = [
     status: 'active',
     createdAt: '2024-01-15T08:00:00Z',
     updatedAt: '2024-01-18T14:30:00Z',
-    leadScientist: 'Dr. Aisha Rahman',
+    leadScientist: 'Arshi Niyaz',
     experimentCount: 4,
   },
   {
