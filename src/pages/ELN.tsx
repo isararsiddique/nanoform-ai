@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { AppLayout } from '@/components/layout/AppLayout';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { useData } from '@/contexts/DataContext';
-import { Plus, FlaskConical, Beaker, ChevronRight } from 'lucide-react';
+import { Plus, FlaskConical, Beaker, Layers, ChevronRight, FolderOpen } from 'lucide-react';
 import { ProjectList } from '@/components/eln/ProjectList';
 import { ExperimentList } from '@/components/eln/ExperimentList';
 import { BatchList } from '@/components/eln/BatchList';
@@ -38,23 +36,49 @@ export default function ELN() {
       title="Electronic Lab Notebook" 
       subtitle="Manage projects, experiments, and batches"
       actions={
-        <Button onClick={() => selectedExperimentId ? setShowNewBatch(true) : setShowNewExperiment(true)}>
+        <Button onClick={() => selectedExperimentId ? setShowNewBatch(true) : setShowNewExperiment(true)} className="rounded-xl shadow-lg">
           <Plus className="w-4 h-4 mr-2" />
           {selectedExperimentId ? 'New Batch' : 'New Experiment'}
         </Button>
       }
     >
-      <div className="flex gap-6 h-[calc(100vh-10rem)]">
+      {/* Breadcrumb */}
+      <div className="flex items-center gap-2 text-sm text-muted-foreground mb-6">
+        <span className="font-medium text-foreground">Projects</span>
+        {selectedProject && (
+          <>
+            <ChevronRight className="w-4 h-4" />
+            <span className="font-medium text-foreground">{selectedProject.name}</span>
+          </>
+        )}
+        {selectedExperiment && (
+          <>
+            <ChevronRight className="w-4 h-4" />
+            <span className="font-medium text-foreground">{selectedExperiment.name}</span>
+          </>
+        )}
+        {selectedBatch && (
+          <>
+            <ChevronRight className="w-4 h-4" />
+            <span className="font-medium text-primary">{selectedBatch.batchNumber}</span>
+          </>
+        )}
+      </div>
+
+      <div className="grid grid-cols-12 gap-6 h-[calc(100vh-12rem)]">
         {/* Left Panel - Projects */}
-        <div className="w-72 flex-shrink-0">
-          <Card className="h-full">
-            <CardHeader className="pb-3">
-              <CardTitle className="text-base flex items-center gap-2">
-                <FlaskConical className="w-4 h-4" />
+        <div className="col-span-12 lg:col-span-3">
+          <Card className="h-full shadow-premium border-0 overflow-hidden">
+            <CardHeader className="pb-3 bg-gradient-to-r from-primary/5 to-transparent border-b">
+              <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                <div className="w-7 h-7 rounded-lg gradient-premium flex items-center justify-center">
+                  <FolderOpen className="w-4 h-4 text-white" />
+                </div>
                 Projects
               </CardTitle>
+              <CardDescription className="text-xs">{projects.length} total</CardDescription>
             </CardHeader>
-            <CardContent className="p-0">
+            <CardContent className="p-0 overflow-auto h-[calc(100%-5rem)]">
               <ProjectList 
                 projects={projects}
                 selectedId={selectedProjectId}
@@ -69,25 +93,27 @@ export default function ELN() {
         </div>
 
         {/* Middle Panel - Experiments */}
-        <div className="w-80 flex-shrink-0">
-          <Card className="h-full">
-            <CardHeader className="pb-3">
+        <div className="col-span-12 lg:col-span-3">
+          <Card className="h-full shadow-premium border-0 overflow-hidden">
+            <CardHeader className="pb-3 bg-gradient-to-r from-accent/5 to-transparent border-b">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-base flex items-center gap-2">
-                  <Beaker className="w-4 h-4" />
+                <CardTitle className="text-sm font-semibold flex items-center gap-2">
+                  <div className="w-7 h-7 rounded-lg bg-accent flex items-center justify-center">
+                    <Beaker className="w-4 h-4 text-white" />
+                  </div>
                   Experiments
                 </CardTitle>
                 {selectedProjectId && (
-                  <Button size="sm" variant="ghost" onClick={() => setShowNewExperiment(true)}>
+                  <Button size="icon" variant="ghost" onClick={() => setShowNewExperiment(true)} className="h-7 w-7 rounded-lg hover:bg-accent/10">
                     <Plus className="w-4 h-4" />
                   </Button>
                 )}
               </div>
-              {selectedProject && (
-                <CardDescription className="truncate">{selectedProject.name}</CardDescription>
-              )}
+              <CardDescription className="text-xs">
+                {selectedProject ? `${projectExperiments.length} experiments` : 'Select a project'}
+              </CardDescription>
             </CardHeader>
-            <CardContent className="p-0">
+            <CardContent className="p-0 overflow-auto h-[calc(100%-5rem)]">
               {selectedProjectId ? (
                 <ExperimentList 
                   experiments={projectExperiments}
@@ -98,8 +124,11 @@ export default function ELN() {
                   }}
                 />
               ) : (
-                <div className="p-4 text-center text-muted-foreground text-sm">
-                  Select a project to view experiments
+                <div className="flex flex-col items-center justify-center h-full p-6 text-center">
+                  <div className="w-12 h-12 rounded-2xl bg-muted/50 flex items-center justify-center mb-3">
+                    <Beaker className="w-6 h-6 text-muted-foreground/50" />
+                  </div>
+                  <p className="text-sm text-muted-foreground">Select a project to view experiments</p>
                 </div>
               )}
             </CardContent>
@@ -107,31 +136,43 @@ export default function ELN() {
         </div>
 
         {/* Right Panel - Batches & Details */}
-        <div className="flex-1 min-w-0">
-          <Card className="h-full">
-            <CardHeader className="pb-3">
+        <div className="col-span-12 lg:col-span-6">
+          <Card className="h-full shadow-premium border-0 overflow-hidden">
+            <CardHeader className="pb-3 bg-gradient-to-r from-success/5 to-transparent border-b">
               <div className="flex items-center justify-between">
-                <div>
-                  <CardTitle className="text-base">
-                    {selectedBatch ? `Batch: ${selectedBatch.batchNumber}` : 'Batches'}
-                  </CardTitle>
-                  {selectedExperiment && !selectedBatch && (
-                    <CardDescription className="truncate">{selectedExperiment.name}</CardDescription>
+                <div className="flex items-center gap-3">
+                  <div className="w-7 h-7 rounded-lg bg-success flex items-center justify-center">
+                    <Layers className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <CardTitle className="text-sm font-semibold">
+                      {selectedBatch ? `Batch: ${selectedBatch.batchNumber}` : 'Batches'}
+                    </CardTitle>
+                    <CardDescription className="text-xs">
+                      {selectedExperiment && !selectedBatch 
+                        ? `${experimentBatches.length} batches` 
+                        : selectedBatch 
+                          ? 'Detailed view' 
+                          : 'Select an experiment'}
+                    </CardDescription>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  {selectedExperimentId && !selectedBatchId && (
+                    <Button size="sm" variant="outline" onClick={() => setShowNewBatch(true)} className="h-8 rounded-lg text-xs">
+                      <Plus className="w-3 h-3 mr-1" />
+                      Add Batch
+                    </Button>
+                  )}
+                  {selectedBatchId && (
+                    <Button size="sm" variant="ghost" onClick={() => setSelectedBatchId(null)} className="h-8 rounded-lg text-xs">
+                      ← Back to list
+                    </Button>
                   )}
                 </div>
-                {selectedExperimentId && !selectedBatchId && (
-                  <Button size="sm" variant="ghost" onClick={() => setShowNewBatch(true)}>
-                    <Plus className="w-4 h-4" />
-                  </Button>
-                )}
-                {selectedBatchId && (
-                  <Button size="sm" variant="ghost" onClick={() => setSelectedBatchId(null)}>
-                    Back to list
-                  </Button>
-                )}
               </div>
             </CardHeader>
-            <CardContent className="overflow-auto h-[calc(100%-4rem)]">
+            <CardContent className="overflow-auto h-[calc(100%-5rem)] p-4">
               {selectedBatchId && selectedBatch ? (
                 <BatchDetail batch={selectedBatch} />
               ) : selectedExperimentId ? (
@@ -141,8 +182,12 @@ export default function ELN() {
                   onSelect={setSelectedBatchId}
                 />
               ) : (
-                <div className="flex items-center justify-center h-full text-muted-foreground text-sm">
-                  Select an experiment to view batches
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className="w-16 h-16 rounded-2xl bg-muted/50 flex items-center justify-center mb-4">
+                    <Layers className="w-8 h-8 text-muted-foreground/50" />
+                  </div>
+                  <p className="text-sm text-muted-foreground mb-1">No experiment selected</p>
+                  <p className="text-xs text-muted-foreground/70">Select an experiment to view and manage batches</p>
                 </div>
               )}
             </CardContent>
