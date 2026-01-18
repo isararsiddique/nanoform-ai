@@ -76,18 +76,18 @@ export default function Dashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5">
           <Card className="group border-primary/20 shadow-premium card-hover bg-gradient-to-br from-primary/5 to-transparent">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl gradient-premium flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                  <Plus className="w-7 h-7 text-white" />
+            <CardContent className="p-5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="w-12 h-12 rounded-xl gradient-premium flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform flex-shrink-0">
+                  <Plus className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground text-lg">New Experiment</h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">Start a new formulation study</p>
+                  <h3 className="font-semibold text-foreground">New Experiment</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">Start a new formulation study</p>
                 </div>
-                <Button asChild className="rounded-xl shadow-lg">
+                <Button asChild className="rounded-xl shadow-lg w-full sm:w-auto flex-shrink-0">
                   <Link to="/eln">Create</Link>
                 </Button>
               </div>
@@ -95,33 +95,33 @@ export default function Dashboard() {
           </Card>
 
           <Card className="group border-accent/20 shadow-premium card-hover bg-gradient-to-br from-accent/5 to-transparent">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-accent flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                  <Brain className="w-7 h-7 text-white" />
+            <CardContent className="p-5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-accent flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform flex-shrink-0">
+                  <Brain className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground text-lg">AI Prediction</h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">Predict particle properties</p>
+                  <h3 className="font-semibold text-foreground">AI Prediction</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">Predict particle properties</p>
                 </div>
-                <Button asChild variant="secondary" className="rounded-xl">
+                <Button asChild variant="secondary" className="rounded-xl w-full sm:w-auto flex-shrink-0">
                   <Link to="/optimizer">Predict</Link>
                 </Button>
               </div>
             </CardContent>
           </Card>
 
-          <Card className="group border-success/20 shadow-premium card-hover bg-gradient-to-br from-success/5 to-transparent">
-            <CardContent className="p-6">
-              <div className="flex items-center gap-5">
-                <div className="w-14 h-14 rounded-2xl bg-success flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform">
-                  <Activity className="w-7 h-7 text-white" />
+          <Card className="group border-success/20 shadow-premium card-hover bg-gradient-to-br from-success/5 to-transparent md:col-span-2 xl:col-span-1">
+            <CardContent className="p-5">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+                <div className="w-12 h-12 rounded-xl bg-success flex items-center justify-center shadow-lg group-hover:scale-105 transition-transform flex-shrink-0">
+                  <Activity className="w-6 h-6 text-white" />
                 </div>
                 <div className="flex-1 min-w-0">
-                  <h3 className="font-semibold text-foreground text-lg">Import Data</h3>
-                  <p className="text-sm text-muted-foreground mt-0.5">Upload instrument results</p>
+                  <h3 className="font-semibold text-foreground">Import Data</h3>
+                  <p className="text-sm text-muted-foreground mt-0.5 line-clamp-1">Upload instrument results</p>
                 </div>
-                <Button asChild variant="secondary" className="rounded-xl">
+                <Button asChild variant="secondary" className="rounded-xl w-full sm:w-auto flex-shrink-0">
                   <Link to="/instruments">Import</Link>
                 </Button>
               </div>
